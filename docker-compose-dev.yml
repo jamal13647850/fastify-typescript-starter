@@ -1,0 +1,23 @@
+version: "3.7"
+
+services:   
+
+  apigatewayBackend-dev:
+    image: node:20-alpine
+    container_name: apigatewaybackenddev
+    restart: always
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - "3008:3008"  
+    command: npm run dev
+    depends_on:
+      - apigateway-db-dev
+    networks:
+      - lingoage-microservice-network-dev
+  
+
+networks:
+  lingoage-microservice-network-dev:
+    external: true
